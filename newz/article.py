@@ -3,6 +3,7 @@ from urllib.parse import urlparse
 
 import httpx
 from fileio import File
+import aiofiles
 from . import network
 from . import nlp
 from .configuration import Configuration
@@ -28,9 +29,11 @@ class AsyncArticle(Article):
 
 
     async def _async_parse_scheme_file(self, path):
-        fpath = File(path)
+        # fpath = File(path)
         try:
-            async with fpath.async_open('r') as fin:
+            # async with fpath.async_open('r') as fin:
+            #     return await fin.read()
+            async with aiofiles.open(path, mode='r') as fin:
                 return await fin.read()
         except OSError as e:
             self.download_state = ArticleDownloadState.FAILED_RESPONSE
