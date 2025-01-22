@@ -2,7 +2,6 @@
 from urllib.parse import urlparse
 
 import httpx
-from fileio import File
 import aiofiles
 from . import network
 from . import nlp
